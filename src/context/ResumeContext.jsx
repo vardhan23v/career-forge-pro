@@ -194,25 +194,39 @@ export const ResumeProvider = ({ children }) => {
       Summary: ${resumeData.summary}`;
 
       let text = "";
+      let groqSuccess = false;
 
       if (groqApiKey) {
-        const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
-          method: "POST",
-          headers: {
-            "Authorization": `Bearer ${groqApiKey}`,
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify({
-            model: "llama-3.3-70b-versatile",
-            messages: [{ role: "user", content: prompt }],
-            temperature: 0.3
-          })
-        });
+        try {
+          const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
+            method: "POST",
+            headers: {
+              "Authorization": `Bearer ${groqApiKey}`,
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+              model: "llama-3.3-70b-versatile",
+              messages: [{ role: "user", content: prompt }],
+              temperature: 0.3
+            })
+          });
 
-        if (!response.ok) throw new Error("Failed to fetch from Groq API");
-        const data = await response.json();
-        text = data.choices[0].message.content;
-      } else {
+          if (response.ok) {
+            const data = await response.json();
+            text = data.choices[0].message.content;
+            groqSuccess = true;
+          } else {
+            console.warn("Groq API failed, falling back to Gemini...");
+          }
+        } catch (e) {
+          console.warn("Groq API error, falling back to Gemini...", e);
+        }
+      }
+
+      if (!groqSuccess) {
+        if (!geminiApiKey) {
+           throw new Error("Groq failed and no Gemini key is available. Please update your API keys in Settings.");
+        }
         const genAI = new GoogleGenerativeAI(geminiApiKey);
         const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
         const result = await model.generateContent(prompt);
@@ -258,32 +272,41 @@ export const ResumeProvider = ({ children }) => {
       ${rawText}`;
 
       let text = "";
+      let groqSuccess = false;
 
       if (groqApiKey) {
-        // Use Groq API (Llama 3)
-        const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
-          method: "POST",
-          headers: {
-            "Authorization": `Bearer ${groqApiKey}`,
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify({
-            model: "llama-3.3-70b-versatile",
-            messages: [{ role: "user", content: prompt }],
-            temperature: 0.1
-          })
-        });
+        try {
+          const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
+            method: "POST",
+            headers: {
+              "Authorization": `Bearer ${groqApiKey}`,
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+              model: "llama-3.3-70b-versatile",
+              messages: [{ role: "user", content: prompt }],
+              temperature: 0.3
+            })
+          });
 
-        if (!response.ok) {
-          throw new Error("Failed to fetch from Groq API");
+          if (response.ok) {
+            const data = await response.json();
+            text = data.choices[0].message.content;
+            groqSuccess = true;
+          } else {
+            console.warn("Groq API failed, falling back to Gemini...");
+          }
+        } catch (e) {
+          console.warn("Groq API error, falling back to Gemini...", e);
         }
+      }
 
-        const data = await response.json();
-        text = data.choices[0].message.content;
-      } else {
-        // Use Gemini API
+      if (!groqSuccess) {
+        if (!geminiApiKey) {
+           throw new Error("Groq failed and no Gemini key is available. Please update your API keys in Settings.");
+        }
         const genAI = new GoogleGenerativeAI(geminiApiKey);
-        const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+        const model = genAI.getGenerativeModel({ model: "gemini-1.5-pro" });
         const result = await model.generateContent(prompt);
         const response = await result.response;
         text = response.text();
