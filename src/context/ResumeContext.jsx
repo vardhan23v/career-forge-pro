@@ -150,15 +150,27 @@ export const ResumeProvider = ({ children }) => {
   const [isGenerating, setIsGenerating] = useState(false);
   const [jobMatches, setJobMatches] = useState([]);
   const [isFetchingJobs, setIsFetchingJobs] = useState(false);
+  const [apiKeys, setApiKeys] = useState(() => {
+    const saved = localStorage.getItem('careerforge_apikeys');
+    if (saved) {
+      try { return JSON.parse(saved); } catch (e) { console.error('Failed to parse API keys'); }
+    }
+    return { groq: '', gemini: '' };
+  });
+
+  const saveApiKeys = (keys) => {
+    setApiKeys(keys);
+    localStorage.setItem('careerforge_apikeys', JSON.stringify(keys));
+  };
 
   const findJobMatches = async () => {
     setIsFetchingJobs(true);
     try {
-      const groqApiKey = import.meta.env.VITE_GROQ_API_KEY;
-      const geminiApiKey = import.meta.env.VITE_GEMINI_API_KEY;
+      const groqApiKey = apiKeys.groq;
+      const geminiApiKey = apiKeys.gemini;
 
       if (!groqApiKey && !geminiApiKey) {
-        throw new Error("Missing VITE_GROQ_API_KEY or VITE_GEMINI_API_KEY environment variable.");
+        throw new Error("Missing API Key! Please configure it in Settings.");
       }
 
       const prompt = `You are an expert tech recruiter and job matching algorithm. Based on the following user details, generate 5 highly realistic, fictional job or internship postings located near the user's location or remote. Return the response strictly as a JSON array of objects matching this exact structure:
@@ -223,11 +235,11 @@ export const ResumeProvider = ({ children }) => {
     if (!rawText.trim()) return;
     setIsGenerating(true);
     try {
-      const groqApiKey = import.meta.env.VITE_GROQ_API_KEY;
-      const geminiApiKey = import.meta.env.VITE_GEMINI_API_KEY;
+      const groqApiKey = apiKeys.groq;
+      const geminiApiKey = apiKeys.gemini;
 
       if (!groqApiKey && !geminiApiKey) {
-        throw new Error("Missing VITE_GROQ_API_KEY or VITE_GEMINI_API_KEY environment variable.");
+        throw new Error("Missing API Key! Please configure it in Settings.");
       }
 
       const prompt = `You are an expert resume writer. Given the following raw text, bio, or notes, extract the information and format it strictly as a JSON object matching this exact structure:
@@ -433,6 +445,8 @@ export const ResumeProvider = ({ children }) => {
       jobMatches,
       isFetchingJobs,
       findJobMatches,
+      apiKeys,
+      saveApiKeys,
       resumes,
       activeResumeId,
       createNewResume,

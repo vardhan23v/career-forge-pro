@@ -10,10 +10,21 @@ const ResumeForm = ({ activeTab }) => {
     jobDescription, setJobDescription, analyzeJobDescription,
     atsScore, missingKeywords, isOptimizing, optimizeResume,
     isGenerating, generateResumeFromText,
-    jobMatches, isFetchingJobs, findJobMatches
+    jobMatches, isFetchingJobs, findJobMatches,
+    apiKeys, saveApiKeys
   } = useResume();
 
   const [rawText, setRawText] = React.useState('');
+  const [localKeys, setLocalKeys] = React.useState({ groq: apiKeys?.groq || '', gemini: apiKeys?.gemini || '' });
+
+  React.useEffect(() => {
+    setLocalKeys({ groq: apiKeys?.groq || '', gemini: apiKeys?.gemini || '' });
+  }, [apiKeys]);
+
+  const handleSaveKeys = () => {
+    saveApiKeys(localKeys);
+    alert('API Keys saved securely to your browser storage!');
+  };
 
   const handleSkillsChange = (e) => {
     const skillsArray = e.target.value.split(',').map(s => s.trim());
@@ -373,10 +384,69 @@ const ResumeForm = ({ activeTab }) => {
     </div>
   );
 
+  const renderSettings = () => (
+    <div className="space-y-stack-lg pb-10">
+      <header className="mb-stack-lg mt-8">
+        <h1 className="font-headline-lg text-slate-900 dark:text-slate-100 flex items-center gap-3">
+          <span className="material-symbols-outlined text-slate-500">settings</span> 
+          App Settings
+        </h1>
+        <p className="text-slate-500 dark:text-slate-400 font-body-md mt-1">Configure your API keys for the AI features. Keys are stored safely in your browser.</p>
+      </header>
+      
+      <div className="glass-panel p-8 space-y-6">
+        <div className="bg-sky-50 dark:bg-sky-900/20 p-4 rounded-lg border border-sky-100 dark:border-sky-800/50">
+          <h4 className="font-bold text-sky-800 dark:text-sky-300 flex items-center gap-2 mb-2">
+            <span className="material-symbols-outlined text-sm">security</span> Privacy Notice
+          </h4>
+          <p className="text-sm text-sky-700 dark:text-sky-400">
+            Your API keys are never sent to our servers. They are stored locally in your browser's <code>localStorage</code> and are only used directly from your computer to communicate with Groq or Google.
+          </p>
+        </div>
+
+        <div className="space-y-stack-sm">
+          <label className="font-semibold text-xs text-slate-500 dark:text-slate-400 uppercase tracking-widest block">
+            Groq API Key (Recommended)
+          </label>
+          <input 
+            className="input-field font-mono text-sm" 
+            type="password"
+            placeholder="gsk_..."
+            value={localKeys.groq}
+            onChange={(e) => setLocalKeys(prev => ({ ...prev, groq: e.target.value }))}
+          />
+          <p className="text-xs text-slate-400 mt-1">Get one for free at <a href="https://console.groq.com/keys" target="_blank" rel="noreferrer" className="text-sky-500 hover:underline">console.groq.com</a></p>
+        </div>
+        
+        <div className="space-y-stack-sm">
+          <label className="font-semibold text-xs text-slate-500 dark:text-slate-400 uppercase tracking-widest block">
+            Google Gemini API Key (Fallback)
+          </label>
+          <input 
+            className="input-field font-mono text-sm" 
+            type="password"
+            placeholder="AIza..."
+            value={localKeys.gemini}
+            onChange={(e) => setLocalKeys(prev => ({ ...prev, gemini: e.target.value }))}
+          />
+          <p className="text-xs text-slate-400 mt-1">Get one for free at <a href="https://aistudio.google.com/app/apikey" target="_blank" rel="noreferrer" className="text-sky-500 hover:underline">aistudio.google.com</a></p>
+        </div>
+
+        <button 
+          onClick={handleSaveKeys}
+          className="btn-primary w-full mt-4 flex items-center justify-center gap-2"
+        >
+          <span className="material-symbols-outlined">save</span> Save API Keys
+        </button>
+      </div>
+    </div>
+  );
+
   return (
     <section className="flex-1 overflow-y-auto pr-2 custom-scrollbar">
       {activeTab === 'ai_gen' && renderAIGenerator()}
       {activeTab === 'jobs' && renderJobMatches()}
+      {activeTab === 'settings' && renderSettings()}
       {activeTab === 'personal' && renderPersonal()}
       {activeTab === 'experience' && renderExperience()}
       {activeTab === 'education' && renderEducation()}

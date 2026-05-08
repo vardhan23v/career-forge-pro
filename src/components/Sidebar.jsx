@@ -52,9 +52,16 @@ const Sidebar = ({ activeTab, setActiveTab }) => {
             <span className="material-symbols-outlined text-sm">help</span>
             <span>Support</span>
           </div>
-          <div className="text-slate-500 dark:text-slate-400 font-semibold p-2 flex items-center gap-3 hover:bg-slate-50 dark:hover:bg-slate-800/50 hover:text-slate-700 dark:hover:text-slate-200 rounded transition-colors text-xs uppercase tracking-widest cursor-pointer">
-            <span className="material-symbols-outlined text-sm">manage_accounts</span>
-            <span>Account</span>
+          <div 
+            onClick={() => setActiveTab('settings')}
+            className={`font-semibold p-2 flex items-center gap-3 rounded transition-colors text-xs uppercase tracking-widest cursor-pointer ${
+              activeTab === 'settings' 
+                ? 'bg-sky-50 dark:bg-slate-800 text-primary dark:text-sky-400 font-bold' 
+                : 'text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800/50 hover:text-slate-700 dark:hover:text-slate-200'
+            }`}
+          >
+            <span className="material-symbols-outlined text-sm">settings</span>
+            <span>Settings</span>
           </div>
         </div>
       </div>
