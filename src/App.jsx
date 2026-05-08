@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { HashRouter, Routes, Route } from 'react-router-dom';
 import { ResumeProvider } from './context/ResumeContext';
 import { ThemeProvider } from './context/ThemeContext';
 import Navbar from './components/Navbar';
@@ -12,7 +12,7 @@ function App() {
   return (
     <ThemeProvider>
       <ResumeProvider>
-        <BrowserRouter>
+        <HashRouter>
           <div className="bg-background dark:bg-slate-950 text-slate-900 dark:text-slate-100 selection:bg-primary/30 min-h-screen font-sans transition-colors duration-300">
             <Navbar />
             
@@ -23,7 +23,7 @@ function App() {
               <Route path="/editor" element={<Editor />} />
             </Routes>
           </div>
-        </BrowserRouter>
+        </HashRouter>
       </ResumeProvider>
     </ThemeProvider>
   );
