@@ -150,29 +150,10 @@ export const ResumeProvider = ({ children }) => {
   const [isGenerating, setIsGenerating] = useState(false);
   const [jobMatches, setJobMatches] = useState([]);
   const [isFetchingJobs, setIsFetchingJobs] = useState(false);
-  const [apiKeys, setApiKeys] = useState(() => {
-    const saved = localStorage.getItem('careerforge_apikeys');
-    if (saved) {
-      try { return JSON.parse(saved); } catch (e) { console.error('Failed to parse API keys'); }
-    }
-    return { groq: '', gemini: '' };
-  });
-
-  const saveApiKeys = (keys) => {
-    setApiKeys(keys);
-    localStorage.setItem('careerforge_apikeys', JSON.stringify(keys));
-  };
 
   const findJobMatches = async () => {
     setIsFetchingJobs(true);
     try {
-      const groqApiKey = apiKeys.groq;
-      const geminiApiKey = apiKeys.gemini;
-
-      if (!groqApiKey && !geminiApiKey) {
-        throw new Error("Missing API Key! Please configure it in Settings.");
-      }
-
       const prompt = `You are an expert tech recruiter and job matching algorithm. Based on the following user details, generate 5 highly realistic, fictional job or internship postings located near the user's location or remote. Return the response strictly as a JSON array of objects matching this exact structure:
       [
         {
@@ -193,53 +174,22 @@ export const ResumeProvider = ({ children }) => {
       Skills: ${resumeData.skills.join(', ')}
       Summary: ${resumeData.summary}`;
 
-      let text = "";
-      let groqSuccess = false;
+      const response = await fetch('/api/find-jobs', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ prompt })
+      });
 
-      if (groqApiKey) {
-        try {
-          const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
-            method: "POST",
-            headers: {
-              "Authorization": `Bearer ${groqApiKey}`,
-              "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-              model: "llama-3.3-70b-versatile",
-              messages: [{ role: "user", content: prompt }],
-              temperature: 0.3
-            })
-          });
-
-          if (response.ok) {
-            const data = await response.json();
-            text = data.choices[0].message.content;
-            groqSuccess = true;
-          } else {
-            console.warn("Groq API failed, falling back to Gemini...");
-          }
-        } catch (e) {
-          console.warn("Groq API error, falling back to Gemini...", e);
-        }
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || "Failed to fetch from backend");
       }
 
-      if (!groqSuccess) {
-        if (!geminiApiKey) {
-           throw new Error("Groq failed and no Gemini key is available. Please update your API keys in Settings.");
-        }
-        const genAI = new GoogleGenerativeAI(geminiApiKey);
-        const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
-        const result = await model.generateContent(prompt);
-        const response = await result.response;
-        text = response.text();
-      }
-      
-      text = text.replace(/```json/gi, '').replace(/```/g, '').trim();
-      const parsedJobs = JSON.parse(text);
-      setJobMatches(parsedJobs);
+      const data = await response.json();
+      setJobMatches(data.jobs);
     } catch (error) {
       console.error("Failed to fetch jobs:", error);
-      alert("Error: " + (error.message || "Failed to find job matches. Please check your API keys in Settings."));
+      alert("Error: " + error.message);
     } finally {
       setIsFetchingJobs(false);
     }
@@ -249,13 +199,6 @@ export const ResumeProvider = ({ children }) => {
     if (!rawText.trim()) return;
     setIsGenerating(true);
     try {
-      const groqApiKey = apiKeys.groq;
-      const geminiApiKey = apiKeys.gemini;
-
-      if (!groqApiKey && !geminiApiKey) {
-        throw new Error("Missing API Key! Please configure it in Settings.");
-      }
-
       const prompt = `You are an expert resume writer. Given the following raw text, bio, or notes, extract the information and format it strictly as a JSON object matching this exact structure:
       {
         "personal": { "name": "", "title": "", "email": "", "phone": "", "location": "", "linkedin": "", "github": "" },
@@ -271,52 +214,21 @@ export const ResumeProvider = ({ children }) => {
       Raw Text:
       ${rawText}`;
 
-      let text = "";
-      let groqSuccess = false;
+      const response = await fetch('/api/generate-resume', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ prompt })
+      });
 
-      if (groqApiKey) {
-        try {
-          const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
-            method: "POST",
-            headers: {
-              "Authorization": `Bearer ${groqApiKey}`,
-              "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-              model: "llama-3.3-70b-versatile",
-              messages: [{ role: "user", content: prompt }],
-              temperature: 0.3
-            })
-          });
-
-          if (response.ok) {
-            const data = await response.json();
-            text = data.choices[0].message.content;
-            groqSuccess = true;
-          } else {
-            console.warn("Groq API failed, falling back to Gemini...");
-          }
-        } catch (e) {
-          console.warn("Groq API error, falling back to Gemini...", e);
-        }
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || "Failed to fetch from backend");
       }
 
-      if (!groqSuccess) {
-        if (!geminiApiKey) {
-           throw new Error("Groq failed and no Gemini key is available. Please update your API keys in Settings.");
-        }
-        const genAI = new GoogleGenerativeAI(geminiApiKey);
-        const model = genAI.getGenerativeModel({ model: "gemini-1.5-pro" });
-        const result = await model.generateContent(prompt);
-        const response = await result.response;
-        text = response.text();
-      }
-      
-      // Clean up potential markdown formatting if the model still includes it
-      text = text.replace(/```json/gi, '').replace(/```/g, '').trim();
-      
+      const data = await response.json();
+      let text = data.text.replace(/```json/gi, '').replace(/```/g, '').trim();
       const parsedData = JSON.parse(text);
-      
+
       // Ensure unique IDs for arrays
       if (parsedData.experience && Array.isArray(parsedData.experience)) {
          parsedData.experience = parsedData.experience.map(e => ({...e, id: Date.now().toString() + Math.random().toString(36).substring(2)}));
@@ -335,7 +247,7 @@ export const ResumeProvider = ({ children }) => {
       }));
     } catch (error) {
       console.error("Failed to generate resume:", error);
-      alert("Error: " + (error.message || "Failed to generate resume. Please check your API keys in Settings."));
+      alert("Error: " + error.message);
     } finally {
       setIsGenerating(false);
     }
@@ -468,8 +380,6 @@ export const ResumeProvider = ({ children }) => {
       jobMatches,
       isFetchingJobs,
       findJobMatches,
-      apiKeys,
-      saveApiKeys,
       resumes,
       activeResumeId,
       createNewResume,
