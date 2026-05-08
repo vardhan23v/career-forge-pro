@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Font+Unspecified:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">tailwind.config = {darkMode: "class", theme: {extend: {colors: {"primary-fixed": "#78ff5c", "surface-dim": "#0e150b", "surface-variant": "#2f372b", background: "#0e150b", "on-primary": "#043900", secondary: "#48fdfd", "on-secondary-fixed-variant": "#004f50", "inverse-primary": "#0e6e00", "surface-container": "#1a2217", "on-surface": "#dde5d4", "surface-container-low": "#161e13", "on-primary-container": "#0f6f00", "surface-container-high": "#242c21", "secondary-fixed": "#43fafa", "tertiary-container": "#d7d7ff", "inverse-on-surface": "#2b3327", surface: "#0e150b", outline: "#87957f", "on-background": "#dde5d4", "tertiary-fixed-dim": "#c0c1ff", "primary-fixed-dim": "#5be141", "on-tertiary-fixed": "#04006d", "on-secondary-fixed": "#002020", "surface-tint": "#5be141", "outline-variant": "#3e4a38", "error-container": "#93000a", "surface-bright": "#333c2f", primary: "#e5ffd7", "surface-container-lowest": "#091007", "on-primary-fixed-variant": "#085300", "on-secondary-container": "#005e5e", "on-secondary": "#003737", "tertiary-fixed": "#e1e0ff", error: "#ffb4ab", "on-error": "#690005", "inverse-surface": "#dde5d4", "on-tertiary-container": "#3c3efd", "on-primary-fixed": "#022200", "surface-container-highest": "#2f372b", "secondary-container": "#00e0e0", "on-tertiary": "#0b00aa", "on-tertiary-fixed-variant": "#190ce7", "on-surface-variant": "#bdcbb3", "secondary-fixed-dim": "#00dddd", "on-error-container": "#ffdad6", "primary-container": "#70f754", tertiary: "#f9f6ff"}, borderRadius: {DEFAULT: "0.125rem", lg: "0.25rem", xl: "0.5rem", full: "0.75rem"}, spacing: {"stack-lg": "32px", gutter: "24px", margin: "48px", "container-max": "1440px", "stack-md": "16px", "stack-sm": "8px", unit: "4px"}, fontFamily: {"label-md": ["Space Grotesk"], "headline-md": ["Space Grotesk"], "body-md": ["Space Grotesk"], "body-lg": ["Space Grotesk"], "display-xl": ["Space Grotesk"], "headline-lg": ["Space Grotesk"], "label-sm": ["Space Grotesk"]}, fontSize: {"label-md": ["14px", {lineHeight: "1.4", letterSpacing: "0.05em", fontWeight: "500"}], "headline-md": ["24px", {lineHeight: "1.3", fontWeight: "500"}], "body-md": ["16px", {lineHeight: "1.6", fontWeight: "400"}], "body-lg": ["18px", {lineHeight: "1.6", fontWeight: "400"}], "display-xl": ["64px", {lineHeight: "1.1", letterSpacing: "-0.02em", fontWeight: "700"}], "headline-lg": ["32px", {lineHeight: "1.2", letterSpacing: "-0.01em", fontWeight: "600"}], "label-sm": ["12px", {lineHeight: "1.2", letterSpacing: "0.1em", fontWeight: "600"}]}}}};</script>
+<style>
+        body {
+            background: radial-gradient(circle at 50% 0%, #2c0051 0%, #16111b 100%);
+            color: #eadfed;
+        }
+        .glass-card {
+            backdrop-filter: blur(16px);
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border: 1px solid transparent;
+            background: linear-gradient(135deg, rgba(255,255,255,0.2) 0%, transparent 40%) border-box;
+            -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+            mask-composite: exclude;
+            pointer-events: none;
+        }
+        .glow-violet {
+            filter: drop-shadow(0 0 15px rgba(168, 85, 247, 0.4));
+        }
+        .circular-progress {
+            background: conic-gradient(#b76dff 85%, #39323d 0);
+        }
+    </style>
+</head>
+<body class="font-body-md text-on-background selection:bg-primary/30 min-h-screen">
+<nav class="fixed top-0 w-full border-b border-white/5 bg-slate-950/60 backdrop-blur-xl flex justify-between items-center px-8 h-16 w-full z-50 shadow-[0_0_20px_rgba(168,85,247,0.15)] font-['Space_Grotesk'] tracking-tight">
+<div class="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-fuchsia-600" title="CareerForge Pro Resume Builder">CareerForge Pro Resume Builder</div>
+<div class="hidden md:flex items-center gap-8">
+<a class="text-purple-400 border-b-2 border-purple-500 pb-1 font-label-md" href="#">Dashboard</a>
+<a class="text-slate-400 hover:text-white transition-colors font-label-md" href="#">Templates</a>
+<a class="text-slate-400 hover:text-white transition-colors font-label-md" href="#">Saved Resumes</a>
+</div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-slate-400 hover:bg-white/5 p-2 rounded-full cursor-pointer transition-all">notifications</span>
+<span class="material-symbols-outlined text-slate-400 hover:bg-white/5 p-2 rounded-full cursor-pointer transition-all">settings</span>
+<div class="w-8 h-8 rounded-full overflow-hidden border border-purple-500/30">
+<img alt="User profile" data-alt="A professional close-up portrait of a modern executive with a thoughtful expression, set against a blurred high-tech office background with soft violet and blue neon highlights. The lighting is sophisticated, emphasizing the crisp detail of their professional attire, maintaining a consistent premium dark-mode aesthetic with deep obsidian tones and subtle architectural luminescence." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAGkE8X2MSM9m7myd4l4aJcvYDHKOXtxxITZQylpL1xJDq5GddaentG7nGeKBkHYCs5iBpz9KHP24Ek8nPyi11lIXa9gf7G5rPf4LBz8_1WaT5_jZ646Hpo1cBlenB6VHQoqIJfn5EBBIxf6GhaWXbX4q2T43ejWNA6x2HhhP1OGtp8Hg3WgTFcOPfr5s-glyfEgDBKX9WhdfPg6A2xgI9tYUEwrAFwk2c7ZsiKAAU3Ryd1oFGc-pLU-g9ijsqTz-dJa5Yysn1i2tI"/>
+</div>
+</div>
+</nav>
+<main class="pt-24 pb-12 px-8 max-w-[1440px] mx-auto grid grid-cols-12 gap-gutter">
+<header class="col-span-12 mb-stack-lg">
+<p class="text-primary font-label-sm uppercase tracking-[0.2em] mb-2">Welcome Back, Alex</p>
+<h1 class="font-display-xl text-white">System Overview</h1>
+</header><div class="col-span-12 mb-stack-lg">
+<button class="w-full glass-card p-8 rounded-xl flex flex-col items-center justify-center gap-4 group hover:border-primary-fixed/50 transition-all duration-300">
+<div class="w-16 h-16 rounded-full bg-primary-container flex items-center justify-center text-on-primary-container shadow-[0_0_30px_rgba(120,255,92,0.3)] group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-4xl">add</span>
+</div>
+<div class="text-center">
+<h3 class="font-headline-lg text-white mb-1">Create New Resume</h3>
+<p class="font-body-md text-slate-400">Start building your next career-defining document with AI-powered optimization.</p>
+</div>
+</button>
+</div>
+<section class="col-span-12 lg:col-span-4 glass-card p-8 rounded-xl flex flex-col items-center justify-center text-center">
+<h2 class="font-headline-md text-white mb-stack-md">ATS Strength Score</h2>
+<div class="relative w-48 h-48 mb-stack-md">
+<div class="absolute inset-0 rounded-full border-8 border-surface-container-highest"></div>
+<div class="absolute inset-0 rounded-full border-8 border-primary-container border-t-transparent glow-violet rotate-45"></div>
+<div class="absolute inset-0 flex flex-col items-center justify-center">
+<span class="font-display-xl text-primary leading-none">85</span>
+<span class="font-label-sm text-slate-400">OPTIMIZED</span>
+</div>
+</div>
+<p class="text-slate-400 font-body-md max-w-xs">Your resume is currently outperforming 92% of applicants in your technical niche.</p>
+<button class="mt-stack-lg bg-gradient-to-r from-primary-container to-secondary-container px-8 py-3 rounded-full text-white font-label-md hover:shadow-[0_0_20px_rgba(168,85,247,0.4)] active:scale-95 transition-all">
+                Run Deep Scan
+            </button>
+</section>
+<section class="col-span-12 lg:col-span-8 glass-card p-8 rounded-xl">
+<div class="flex justify-between items-center mb-stack-lg">
+<h2 class="font-headline-md text-white">System Activity</h2>
+<span class="material-symbols-outlined text-tertiary">query_stats</span>
+</div>
+<div class="space-y-4">
+<div class="flex items-center gap-4 p-4 bg-white/5 rounded-lg border border-white/5">
+<div class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">auto_awesome</span>
+</div>
+<div class="flex-1">
+<p class="font-label-md text-white">Keyword Injection Complete</p>
+<p class="font-body-md text-slate-400 text-sm">Added 'Full-stack Architecture' to Experience section.</p>
+</div>
+<span class="text-slate-500 font-label-sm">2m ago</span>
+</div>
+<div class="flex items-center gap-4 p-4 bg-white/5 rounded-lg border border-white/5">
+<div class="w-10 h-10 rounded-lg bg-secondary/10 flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined">verified</span>
+</div>
+<div class="flex-1">
+<p class="font-label-md text-white">Schema Validation Passed</p>
+<p class="font-body-md text-slate-400 text-sm">Resume format successfully verified for Oracle ATS.</p>
+</div>
+<span class="text-slate-500 font-label-sm">45m ago</span>
+</div>
+<div class="flex items-center gap-4 p-4 bg-white/5 rounded-lg border border-white/5 opacity-60">
+<div class="w-10 h-10 rounded-lg bg-tertiary/10 flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined">edit_document</span>
+</div>
+<div class="flex-1">
+<p class="font-label-md text-white">Template Migrated</p>
+<p class="font-body-md text-slate-400 text-sm">Moved content to 'Quantum Obsidian' premium layout.</p>
+</div>
+<span class="text-slate-500 font-label-sm">3h ago</span>
+</div>
+</div>
+</section>
+<section class="col-span-12 mt-stack-lg">
+<h2 class="font-headline-lg text-white mb-stack-lg">Recommended Layouts</h2>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<div class="glass-card rounded-xl group cursor-pointer hover:translate-y-[-8px] transition-all duration-300">
+<div class="aspect-[3/4] bg-surface-container overflow-hidden">
+<img alt="Layout Preview" data-alt="A futuristic and minimalist resume layout displayed on a high-resolution screen with glowing neon cyan accents. The background is a dark, sleek obsidian glass surface reflecting soft purple light. The composition is clean, using bold typography and thin geometric lines, evoking a sense of premium architectural precision and high-tech career advancement." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDHcQyIJvuWeDeg_TFoJVqTZN0tgm3g9RNNRE6vb_LNXyUntz6xj5uLLfTfZQdcftSKK0m1E6nMB57i4oPbmYLQ972XziiEagk6zdRokpwqclSRRYqe8VqlyU_tx4KiFVgWBSOmOxGqEhuP73kT8WXDbgVoojhDBx1v1TZ4Ugv9UrICKMbKmk-i96EWI9neu0E8qZZrv8flTK6PzhmQjhJ-5g8nziIiSYQSC-hx2OL_PkSORhxFUBydfzfZAIVXtEFDNNXGvHYBZ-s"/>
+</div>
+<div class="p-6">
+<div class="flex justify-between items-center mb-2">
+<p class="font-label-md text-white">Quantum Obsidian</p>
+<span class="bg-tertiary/20 text-tertiary text-[10px] px-2 py-1 rounded tracking-widest uppercase">Popular</span>
+</div>
+<p class="text-slate-400 font-body-md text-sm">Best for Senior Engineering roles at Tier 1 firms.</p>
+</div>
+</div>
+<div class="glass-card rounded-xl group cursor-pointer hover:translate-y-[-8px] transition-all duration-300">
+<div class="aspect-[3/4] bg-surface-container overflow-hidden">
+<img alt="Layout Preview" data-alt="An elegant, multi-layered digital document design showing complex data visualizations and professional experience timelines in a holographic style. The palette is dominated by deep violets and soft magentas, with high-contrast white text that appears to float above the surface. The mood is sophisticated and authoritative, perfectly fitting an executive-level career dashboard." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCsD9KYgsAR7RbrftfcFnMdhBcDNTPzOmnLA7SE_z1cV873E0zREpH_J5Dxd6TzMABElO0f6eC2IeMnUNmu55k5U0oDTj6jqIt8QidXOhYl_bP6T6pyRLFbG05QfIBAMxX5d7A37qu-WkjWIlvt56tZNKWdT4FDyfXy6JHBXu0YRXdnokXNlJNLCSG0_p0WdcPiRjECe7Vl7O3rMxEtxlmTXppG2z-OtnUOIEvDX5JfjzFvNclZW1-UYUdNmZfEj1j3rwN4H32sZxA"/>
+</div>
+<div class="p-6">
+<div class="flex justify-between items-center mb-2">
+<p class="font-label-md text-white">Stellar Minimalist</p>
+<span class="bg-primary/20 text-primary text-[10px] px-2 py-1 rounded tracking-widest uppercase">New</span>
+</div>
+<p class="text-slate-400 font-body-md text-sm">A clean, focused layout prioritizing white space and typography.</p>
+</div>
+</div>
+<div class="glass-card rounded-xl group cursor-pointer hover:translate-y-[-8px] transition-all duration-300">
+<div class="aspect-[3/4] bg-surface-container overflow-hidden">
+<img alt="Layout Preview" data-alt="A dark-themed professional profile interface with glowing violet gradients and sharp, 1px luminous borders. The layout features abstract nodes and connections, suggesting a highly networked and technical background. The lighting is low-key and dramatic, creating a premium feel of advanced computation and sophisticated career management software." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCZceaB6DOu5UWO0dVBYBrYF799U51PGMVJrtUAvhvFRgWflSXhu1xOhnjjWK-BGVh5OZ0LAm75_gICBu2ELBMEZtusDeC-wo9Dh-mFxxjoYO4SMuLE7ivgtZ2duld3bPfOKIqmkUNJKFfTwlECc34qTVTpTZ5Rkpw4-hY7Kyi7LOjl6RyKE7-JUgKW3gA_J1Cz809RsvrB47nr7tX7xTm-5MD84blkB-NYqOPURKJhNDXIdscdwB22P15HJuRXsZ6ScLb5TvXoo18"/>
+</div>
+<div class="p-6">
+<div class="flex justify-between items-center mb-2">
+<p class="font-label-md text-white">Neural Architect</p>
+<span class="bg-secondary/20 text-secondary text-[10px] px-2 py-1 rounded tracking-widest uppercase">AI-Optimized</span>
+</div>
+<p class="text-slate-400 font-body-md text-sm">Specifically designed for maximum readability across all major ATS.</p>
+</div>
+</div>
+</div>
+</section>
+</main>
+</body></html>

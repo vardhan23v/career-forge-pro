@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CareerForge Pro | Saved Resumes</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Font+Unspecified:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">tailwind.config = {darkMode: "class", theme: {extend: {colors: {"primary-fixed": "#78ff5c", "surface-dim": "#0e150b", "surface-variant": "#2f372b", background: "#0e150b", "on-primary": "#043900", secondary: "#48fdfd", "on-secondary-fixed-variant": "#004f50", "inverse-primary": "#0e6e00", "surface-container": "#1a2217", "on-surface": "#dde5d4", "surface-container-low": "#161e13", "on-primary-container": "#0f6f00", "surface-container-high": "#242c21", "secondary-fixed": "#43fafa", "tertiary-container": "#d7d7ff", "inverse-on-surface": "#2b3327", surface: "#0e150b", outline: "#87957f", "on-background": "#dde5d4", "tertiary-fixed-dim": "#c0c1ff", "primary-fixed-dim": "#5be141", "on-tertiary-fixed": "#04006d", "on-secondary-fixed": "#002020", "surface-tint": "#5be141", "outline-variant": "#3e4a38", "error-container": "#93000a", "surface-bright": "#333c2f", primary: "#e5ffd7", "surface-container-lowest": "#091007", "on-primary-fixed-variant": "#085300", "on-secondary-container": "#005e5e", "on-secondary": "#003737", "tertiary-fixed": "#e1e0ff", error: "#ffb4ab", "on-error": "#690005", "inverse-surface": "#dde5d4", "on-tertiary-container": "#3c3efd", "on-primary-fixed": "#022200", "surface-container-highest": "#2f372b", "secondary-container": "#00e0e0", "on-tertiary": "#0b00aa", "on-tertiary-fixed-variant": "#190ce7", "on-surface-variant": "#bdcbb3", "secondary-fixed-dim": "#00dddd", "on-error-container": "#ffdad6", "primary-container": "#70f754", tertiary: "#f9f6ff"}, borderRadius: {DEFAULT: "0.125rem", lg: "0.25rem", xl: "0.5rem", full: "0.75rem"}, spacing: {"stack-lg": "32px", gutter: "24px", margin: "48px", "container-max": "1440px", "stack-md": "16px", "stack-sm": "8px", unit: "4px"}, fontFamily: {"label-md": ["Space Grotesk"], "headline-md": ["Space Grotesk"], "body-md": ["Space Grotesk"], "body-lg": ["Space Grotesk"], "display-xl": ["Space Grotesk"], "headline-lg": ["Space Grotesk"], "label-sm": ["Space Grotesk"]}, fontSize: {"label-md": ["14px", {lineHeight: "1.4", letterSpacing: "0.05em", fontWeight: "500"}], "headline-md": ["24px", {lineHeight: "1.3", fontWeight: "500"}], "body-md": ["16px", {lineHeight: "1.6", fontWeight: "400"}], "body-lg": ["18px", {lineHeight: "1.6", fontWeight: "400"}], "display-xl": ["64px", {lineHeight: "1.1", letterSpacing: "-0.02em", fontWeight: "700"}], "headline-lg": ["32px", {lineHeight: "1.2", letterSpacing: "-0.01em", fontWeight: "600"}], "label-sm": ["12px", {lineHeight: "1.2", letterSpacing: "0.1em", fontWeight: "600"}]}}}};</script>
+<style>
+        .glass-card {
+            backdrop-filter: blur(16px);
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid transparent;
+            border-image: linear-gradient(to bottom right, rgba(255, 255, 255, 0.2), transparent) 1;
+        }
+        .glow-border {
+            border: 1px solid rgba(221, 183, 255, 0.3);
+            box-shadow: 0 0 15px rgba(168, 85, 247, 0.1);
+        }
+        .neon-stroke {
+            filter: drop-shadow(0 0 2px currentColor);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen selection:bg-primary/30">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full border-b border-white/10 bg-slate-950/60 backdrop-blur-xl flex justify-between items-center px-8 h-16 z-50 shadow-[0_0_20px_rgba(168,85,247,0.15)]">
+<div class="flex items-center gap-8">
+<span class="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-fuchsia-600 font-['Space_Grotesk'] tracking-tight">CareerForge Pro</span>
+<div class="hidden md:flex gap-6 items-center">
+<a class="font-['Space_Grotesk'] tracking-tight text-slate-400 hover:text-white transition-colors hover:bg-white/5 px-3 py-1 rounded-full" href="#">Dashboard</a>
+<a class="font-['Space_Grotesk'] tracking-tight text-slate-400 hover:text-white transition-colors hover:bg-white/5 px-3 py-1 rounded-full" href="#">Templates</a>
+<a class="font-['Space_Grotesk'] tracking-tight text-purple-400 border-b-2 border-purple-500 pb-1" href="#">Saved Resumes</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-slate-400 hover:text-white transition-all active:scale-95">notifications</button>
+<button class="material-symbols-outlined text-slate-400 hover:text-white transition-all active:scale-95">settings</button>
+<div class="w-8 h-8 rounded-full overflow-hidden border border-primary/30">
+<img alt="User profile" class="w-full h-full object-cover" data-alt="A professional headshot of a person with a neutral expression, set against a blurred futuristic office background. The lighting is crisp and cinematic with subtle purple rim light to match the high-end technical design system. The overall mood is sophisticated and authoritative, suitable for a premium career platform." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCkD9mlloNnSSXh89Qn2L4i3jhRNA2o5lzvTIQG_owBz83F9Hy-qDhtK8nGKEsUaBeRs2-zc81lIYNPiJj9Rxbyqui-I0Tk3GCHL6EV830ESlgiHF8jpirMzsietmcUdavka2gX58XAKNHFv8FZ74J5Wb3HZQbhimoskVK2Rj7zvJ0Pqv4jfFaMnJaIhoKItiCeCJAQ0YaC0h7dQi5il18b5AARs8MwEvf71LQI6_p4TK6nvpAv9t8ba7KEdmtz3znUCK8vyLyqc_Q"/>
+</div>
+</div>
+</nav>
+<main class="pt-32 pb-24 px-margin max-w-[1440px] mx-auto">
+<!-- Header Section -->
+<header class="flex flex-col md:flex-row md:items-end justify-between mb-stack-lg gap-gutter">
+<div>
+<h1 class="font-display-xl text-display-xl text-primary mb-unit">Saved Resumes</h1>
+<p class="text-on-surface-variant font-body-lg">Manage your high-performance career assets.</p>
+</div>
+<button class="flex items-center gap-2 bg-gradient-to-r from-purple-500 to-blue-500 text-white px-8 py-3 rounded-xl font-label-md text-label-md hover:shadow-[0_0_20px_rgba(168,85,247,0.4)] transition-all active:scale-95">
+<span class="material-symbols-outlined" data-weight="fill">add_circle</span>
+                CREATE NEW RESUME
+            </button>
+</header>
+<!-- Main Content Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter mb-stack-lg">
+<!-- Resume Card 1 -->
+<div class="glass-card glow-border p-6 rounded-xl flex flex-col group hover:translate-y-[-4px] transition-transform duration-300">
+<div class="flex justify-between items-start mb-stack-md">
+<div class="bg-primary/10 px-3 py-1 rounded-full flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-tertiary animate-pulse"></span>
+<span class="text-tertiary font-label-sm text-label-sm uppercase">ATS SCORE: 98</span>
+</div>
+<div class="flex gap-2 opacity-40 group-hover:opacity-100 transition-opacity">
+<button class="material-symbols-outlined text-on-surface hover:text-primary" title="Edit">edit_note</button>
+<button class="material-symbols-outlined text-on-surface hover:text-primary" title="Download">download</button>
+<button class="material-symbols-outlined text-error hover:scale-110" title="Delete">delete</button>
+</div>
+</div>
+<div class="mb-stack-md">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-unit">Senior Product Designer</h3>
+<p class="text-on-surface-variant font-label-sm text-label-sm uppercase">LAST EDITED: 2 HOURS AGO</p>
+</div>
+<div class="mt-auto h-32 w-full rounded bg-surface-container-low overflow-hidden relative border border-white/5">
+<img alt="Resume Preview" class="w-full h-full object-cover opacity-50 group-hover:opacity-80 transition-opacity" data-alt="A close-up preview of a minimalist resume layout with high-end typography and structured grid layout. The document features clean lines, ample whitespace, and a sophisticated monochromatic color palette with deep purple accent colors. The lighting is soft, suggesting a high-quality physical paper or a premium digital screen render." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBa3Uh2zA1cL-OQOlkVKLZducrLOLB0BwaGNJ7JG_Z_6eCFmNnWHpBiZZV_u4JBqxB0RavDvc4WkyiFKtkLJmVYRkmh0yic3B8Bu_ta1VLe8mV4fQegNW2idkfhXrD8Kme44HEKskbzD9fpfVyOGaoC_1aLPdr7-FMNzB8Usk1SbChX0f89ov8plmjJA3Pk9d9RPcIzWL-Gc2MSx1ye1pW_FouGA0rYwX9n3JhjJA4Q7-BHQVOBgyeZQXnfo7rossQWh2LHKvBlZiM"/>
+<div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 to-transparent"></div>
+</div>
+</div>
+<!-- Resume Card 2 -->
+<div class="glass-card glow-border p-6 rounded-xl flex flex-col group hover:translate-y-[-4px] transition-transform duration-300">
+<div class="flex justify-between items-start mb-stack-md">
+<div class="bg-primary/10 px-3 py-1 rounded-full flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span class="text-secondary font-label-sm text-label-sm uppercase">ATS SCORE: 84</span>
+</div>
+<div class="flex gap-2 opacity-40 group-hover:opacity-100 transition-opacity">
+<button class="material-symbols-outlined text-on-surface hover:text-primary" title="Edit">edit_note</button>
+<button class="material-symbols-outlined text-on-surface hover:text-primary" title="Download">download</button>
+<button class="material-symbols-outlined text-error hover:scale-110" title="Delete">delete</button>
+</div>
+</div>
+<div class="mb-stack-md">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-unit">Technical Lead</h3>
+<p class="text-on-surface-variant font-label-sm text-label-sm uppercase">LAST EDITED: 3 DAYS AGO</p>
+</div>
+<div class="mt-auto h-32 w-full rounded bg-surface-container-low overflow-hidden relative border border-white/5">
+<img alt="Resume Preview" class="w-full h-full object-cover opacity-50 group-hover:opacity-80 transition-opacity" data-alt="A stylized technical resume preview showcasing a skills-heavy layout with data visualization bars and technical icon sets. The design is modern and dense, utilizing a futuristic aesthetic with slate backgrounds and soft cyan glowing accents. The lighting effect creates a sense of a high-tech interface or holographic projection." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBD9AzWikOHAeFeIINhcAcZ2-TLLEabHfPHL8q2gF3ZJ4W_9heM3XE6-iUkx4SMBPuXN-cuZpgXvFolWU3g40TcfL_AisHUrKc49ks-Cw6BsRnWhPadsOYhMdmyHN9qQq_LQKKR2x5c77G9tAQlNL87U3lp-BFPL3YgHtamTda_PVVUlEInkPEyjwT1DIhsakK7fmL0fBXKenNOj5-hxFyi9fwNBDpGViKuVSQhGcANYQdyu3WgFmt5bV2fOQYRZUDJPMkgYtK6bC8"/>
+<div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 to-transparent"></div>
+</div>
+</div>
+<!-- Empty State / Add New -->
+<div class="border-2 border-dashed border-white/10 rounded-xl flex flex-col items-center justify-center p-6 bg-white/5 hover:bg-white/10 hover:border-primary/50 transition-all cursor-pointer group">
+<span class="material-symbols-outlined text-5xl text-slate-600 group-hover:text-primary transition-colors mb-stack-sm">add_circle</span>
+<p class="font-label-md text-label-md text-slate-500 group-hover:text-primary transition-colors">CREATE NEW RESUME</p>
+</div>
+</div>
+<!-- Quantum Modification Log -->
+<section class="mt-stack-lg">
+<div class="flex items-center gap-4 mb-stack-md">
+<span class="material-symbols-outlined text-primary neon-stroke">timeline</span>
+<h2 class="font-headline-lg text-headline-lg">Quantum Modification Log</h2>
+</div>
+<div class="glass-card rounded-xl overflow-hidden border border-white/5">
+<div class="divide-y divide-white/5">
+<!-- Log Item 1 -->
+<div class="p-4 flex items-center justify-between hover:bg-white/5 transition-colors">
+<div class="flex items-center gap-gutter">
+<span class="font-label-sm text-label-sm text-secondary w-20">14:22:01</span>
+<div class="flex flex-col">
+<span class="font-body-md text-on-surface">Neural Optimization: Keywords Injection</span>
+<span class="text-on-surface-variant text-label-sm uppercase">Target: Senior Product Designer</span>
+</div>
+</div>
+<div class="flex items-center gap-2 text-tertiary">
+<span class="material-symbols-outlined text-sm">check_circle</span>
+<span class="font-label-sm text-label-sm uppercase">+12% Match</span>
+</div>
+</div>
+<!-- Log Item 2 -->
+<div class="p-4 flex items-center justify-between hover:bg-white/5 transition-colors">
+<div class="flex items-center gap-gutter">
+<span class="font-label-sm text-label-sm text-secondary w-20">11:05:45</span>
+<div class="flex flex-col">
+<span class="font-body-md text-on-surface">Syntax Refinement: Action Verb Replacement</span>
+<span class="text-on-surface-variant text-label-sm uppercase">Target: Technical Lead</span>
+</div>
+</div>
+<div class="flex items-center gap-2 text-primary">
+<span class="material-symbols-outlined text-sm">auto_awesome</span>
+<span class="font-label-sm text-label-sm uppercase">AI Enhanced</span>
+</div>
+</div>
+<!-- Log Item 3 -->
+<div class="p-4 flex items-center justify-between hover:bg-white/5 transition-colors">
+<div class="flex items-center gap-gutter">
+<span class="font-label-sm text-label-sm text-secondary w-20">09:12:12</span>
+<div class="flex flex-col">
+<span class="font-body-md text-on-surface">Structural Alignment: Experience Reordering</span>
+<span class="text-on-surface-variant text-label-sm uppercase">Target: Senior Product Designer</span>
+</div>
+</div>
+<div class="flex items-center gap-2 text-tertiary">
+<span class="material-symbols-outlined text-sm">check_circle</span>
+<span class="font-label-sm text-label-sm uppercase">Optimized</span>
+</div>
+</div>
+</div>
+<div class="bg-white/5 p-3 text-center">
+<button class="font-label-sm text-label-sm text-slate-400 hover:text-primary transition-colors uppercase tracking-widest">View Full Audit Trail</button>
+</div>
+</div>
+</section>
+</main>
+<!-- SideNavBar - Editor Mode Context -->
+<aside class="fixed left-0 top-16 bottom-0 w-64 bg-slate-950/40 backdrop-blur-md border-r border-white/10 flex flex-col pt-6 z-40 hidden lg:flex shadow-[5px_0_15px_rgba(0,0,0,0.5)]">
+<div class="px-6 mb-8">
+<h4 class="font-['Space_Grotesk'] text-sm uppercase tracking-widest text-purple-200">Editor Mode</h4>
+<p class="text-slate-400 text-[10px] uppercase tracking-tighter">Resume Builder v2.0</p>
+</div>
+<nav class="flex flex-col gap-1 px-3">
+<div class="text-slate-400 p-3 flex items-center gap-3 hover:bg-white/5 transition-transform duration-200 hover:translate-x-1 cursor-pointer">
+<span class="material-symbols-outlined">person</span>
+<span class="font-['Space_Grotesk'] text-sm uppercase tracking-widest">Personal Info</span>
+</div>
+<div class="text-slate-400 p-3 flex items-center gap-3 hover:bg-white/5 transition-transform duration-200 hover:translate-x-1 cursor-pointer">
+<span class="material-symbols-outlined">work</span>
+<span class="font-['Space_Grotesk'] text-sm uppercase tracking-widest">Experience</span>
+</div>
+<div class="text-slate-400 p-3 flex items-center gap-3 hover:bg-white/5 transition-transform duration-200 hover:translate-x-1 cursor-pointer">
+<span class="material-symbols-outlined">school</span>
+<span class="font-['Space_Grotesk'] text-sm uppercase tracking-widest">Education</span>
+</div>
+</nav>
+<div class="mt-auto px-4 pb-8 space-y-4">
+<button class="w-full bg-primary/20 border border-primary/50 text-white py-3 rounded-lg font-['Space_Grotesk'] text-sm uppercase tracking-widest hover:bg-primary/30 transition-all hover:shadow-[0_0_10px_rgba(168,85,247,0.3)] active:scale-95">
+                Export PDF
+            </button>
+<div class="pt-4 border-t border-white/5 flex flex-col gap-1">
+<div class="text-slate-400 p-2 flex items-center gap-3 hover:bg-white/5 cursor-pointer">
+<span class="material-symbols-outlined text-lg">help</span>
+<span class="font-['Space_Grotesk'] text-[10px] uppercase tracking-widest">Support</span>
+</div>
+<div class="text-slate-400 p-2 flex items-center gap-3 hover:bg-white/5 cursor-pointer">
+<span class="material-symbols-outlined text-lg">manage_accounts</span>
+<span class="font-['Space_Grotesk'] text-[10px] uppercase tracking-widest">Account</span>
+</div>
+</div>
+</div>
+</aside>
+<!-- Bottom Navigation for Mobile -->
+<nav class="md:hidden fixed bottom-0 left-0 right-0 h-16 bg-slate-950/80 backdrop-blur-xl border-t border-white/10 flex items-center justify-around z-50">
+<button class="flex flex-col items-center text-slate-400">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-[10px] uppercase">Dash</span>
+</button>
+<button class="flex flex-col items-center text-primary">
+<span class="material-symbols-outlined">description</span>
+<span class="text-[10px] uppercase">Resumes</span>
+</button>
+<button class="flex flex-col items-center text-slate-400">
+<span class="material-symbols-outlined">auto_fix</span>
+<span class="text-[10px] uppercase">AI Fix</span>
+</button>
+</nav>
+</body></html>

@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Font+Unspecified:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background-color: #16111b;
+            color: #eadfed;
+        }
+        .glass-card {
+            backdrop-filter: blur(16px);
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .glass-card:hover {
+            border-color: rgba(221, 183, 255, 0.4);
+            box-shadow: 0 0 20px rgba(168, 85, 247, 0.15);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .neon-border {
+            border: 1px solid;
+            border-image: linear-gradient(to bottom right, rgba(255,255,255,0.2), transparent) 1;
+        }
+    </style>
+<script id="tailwind-config">tailwind.config = {darkMode: "class", theme: {extend: {colors: {"primary-fixed": "#78ff5c", "surface-dim": "#0e150b", "surface-variant": "#2f372b", background: "#0e150b", "on-primary": "#043900", secondary: "#48fdfd", "on-secondary-fixed-variant": "#004f50", "inverse-primary": "#0e6e00", "surface-container": "#1a2217", "on-surface": "#dde5d4", "surface-container-low": "#161e13", "on-primary-container": "#0f6f00", "surface-container-high": "#242c21", "secondary-fixed": "#43fafa", "tertiary-container": "#d7d7ff", "inverse-on-surface": "#2b3327", surface: "#0e150b", outline: "#87957f", "on-background": "#dde5d4", "tertiary-fixed-dim": "#c0c1ff", "primary-fixed-dim": "#5be141", "on-tertiary-fixed": "#04006d", "on-secondary-fixed": "#002020", "surface-tint": "#5be141", "outline-variant": "#3e4a38", "error-container": "#93000a", "surface-bright": "#333c2f", primary: "#e5ffd7", "surface-container-lowest": "#091007", "on-primary-fixed-variant": "#085300", "on-secondary-container": "#005e5e", "on-secondary": "#003737", "tertiary-fixed": "#e1e0ff", error: "#ffb4ab", "on-error": "#690005", "inverse-surface": "#dde5d4", "on-tertiary-container": "#3c3efd", "on-primary-fixed": "#022200", "surface-container-highest": "#2f372b", "secondary-container": "#00e0e0", "on-tertiary": "#0b00aa", "on-tertiary-fixed-variant": "#190ce7", "on-surface-variant": "#bdcbb3", "secondary-fixed-dim": "#00dddd", "on-error-container": "#ffdad6", "primary-container": "#70f754", tertiary: "#f9f6ff"}, borderRadius: {DEFAULT: "0.125rem", lg: "0.25rem", xl: "0.5rem", full: "0.75rem"}, spacing: {"stack-lg": "32px", gutter: "24px", margin: "48px", "container-max": "1440px", "stack-md": "16px", "stack-sm": "8px", unit: "4px"}, fontFamily: {"label-md": ["Space Grotesk"], "headline-md": ["Space Grotesk"], "body-md": ["Space Grotesk"], "body-lg": ["Space Grotesk"], "display-xl": ["Space Grotesk"], "headline-lg": ["Space Grotesk"], "label-sm": ["Space Grotesk"]}, fontSize: {"label-md": ["14px", {lineHeight: "1.4", letterSpacing: "0.05em", fontWeight: "500"}], "headline-md": ["24px", {lineHeight: "1.3", fontWeight: "500"}], "body-md": ["16px", {lineHeight: "1.6", fontWeight: "400"}], "body-lg": ["18px", {lineHeight: "1.6", fontWeight: "400"}], "display-xl": ["64px", {lineHeight: "1.1", letterSpacing: "-0.02em", fontWeight: "700"}], "headline-lg": ["32px", {lineHeight: "1.2", letterSpacing: "-0.01em", fontWeight: "600"}], "label-sm": ["12px", {lineHeight: "1.2", letterSpacing: "0.1em", fontWeight: "600"}]}}}};</script>
+</head>
+<body class="bg-surface overflow-x-hidden min-h-screen">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full border-b border-white/10 bg-slate-950/60 backdrop-blur-xl flex justify-between items-center px-8 h-16 z-50 shadow-[0_0_20px_rgba(168,85,247,0.15)] font-['Space_Grotesk'] tracking-tight">
+<div class="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-fuchsia-600">CareerForge Pro Resume Builder</div>
+<div class="hidden md:flex items-center gap-8">
+<a class="text-slate-400 hover:text-white transition-colors" href="#">Dashboard</a>
+<a class="text-purple-400 border-b-2 border-purple-500 pb-1" href="#">Templates</a>
+<a class="text-slate-400 hover:text-white transition-colors" href="#">Saved Resumes</a>
+</div>
+<div class="flex items-center gap-6">
+<span class="material-symbols-outlined text-slate-400 hover:text-white cursor-pointer active:scale-95 transition-all">notifications</span>
+<span class="material-symbols-outlined text-slate-400 hover:text-white cursor-pointer active:scale-95 transition-all">settings</span>
+<div class="w-8 h-8 rounded-full border border-purple-500/30 overflow-hidden">
+<img alt="User profile" data-alt="A close-up high-resolution profile avatar of a professional individual with a futuristic tech aesthetic. The lighting is dominated by soft violet and deep blue hues, reflecting off their skin with a high-tech studio glow. The background is a minimalist, out-of-focus laboratory environment with blurred data streams. This image is clean, sharp, and embodies a premium digital workspace identity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBMxemCO9MUnPwzJyCKjFJsbd8UfcBc0sxtOJzzKOjTAp9Wxo2EecuF64AZSa1dxSxImftEEs7MLmgLc8jm8kK64t_YiJv1qvuqfV4r25PQXScyowEjrfWLAQ32JZ9ymHdXkbdPV-4yFNV_JR7pe8OA51g1G4hIrOTIZ6Wy_6OrOpoYdASXDWAsr3sU2YLksCgltQnS7_07hNaPhJ8pPifWN7ej4ElwukzkxrFV90z_o9vG2ecjslgaw5zTmZR1aAaW54X0WrZx9zc"/>
+</div>
+</div>
+</nav>
+<!-- Main Content Canvas -->
+<main class="pt-24 pb-16 px-margin max-w-[1440px] mx-auto">
+<!-- Hero Header -->
+<header class="mb-stack-lg flex flex-col md:flex-row md:items-end justify-between gap-stack-md">
+<div>
+<h1 class="font-display-xl text-display-xl text-on-surface mb-stack-sm tracking-tight">Curated Blueprints</h1>
+<p class="font-body-lg text-body-lg text-outline max-w-2xl">
+            Precision-engineered templates for the modern visionary. Each blueprint is designed with architectural radiance to elevate your professional narrative through high-density data visualization and obsidian-glass aesthetics.
+        </p>
+</div>
+<div class="flex-shrink-0">
+<button class="flex items-center gap-2 bg-gradient-to-r from-primary-container to-secondary-container text-on-primary-container px-8 py-4 font-label-md text-label-md rounded-xl shadow-[0_0_20px_rgba(120,255,92,0.3)] hover:shadow-[0_0_30px_rgba(120,255,92,0.5)] transition-all active:scale-95 group">
+<span class="material-symbols-outlined transition-transform group-hover:rotate-90">add</span>
+            CREATE NEW BLUEPRINT
+        </button>
+</div>
+</header>
+<!-- Template Grid (Bento Style) -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
+<!-- Featured Template: The Vanguard -->
+<div class="md:col-span-8 group relative overflow-hidden glass-card rounded-xl">
+<div class="aspect-[16/9] relative">
+<img alt="Template Preview" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="A high-end resume template preview called 'The Vanguard' displayed on a sleek glass tablet. The layout is asymmetric and modern, featuring bold typography in violet and soft cyan. The background consists of dark obsidian glass textures with subtle light leaks and glowing grid lines. The lighting is cinematic, highlighting the sharp edges and sophisticated layout of the digital document." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCxtCMW-50ZpSpvhmfhJAoVp7MSOFok5aHCBwI5LS5Yfk5aE3LRtZQDC_Fy_5AAj3XjvPvPeTA5OIMbLPHARhSvAkbye1R-jakTilhrClPc8zJjhxYDfs7OVuKsJIXSs39ZIzb4pX4Dgd5YFtoKwGLUCyOOgXza9IPZqmbaplrKEUNoRXd4IsUI85NR4g5fMdZwYc63gK7IoiMAogyvHF2PCCxClgP9qW-aD01Vc3N3JgLG6zIPrwYkl5rFaCjP54EVORBUQBhTGXY"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-dim via-transparent to-transparent"></div>
+</div>
+<div class="p-8 relative -mt-20">
+<div class="flex justify-between items-end">
+<div>
+<div class="flex gap-2 mb-stack-sm">
+<span class="bg-primary/10 text-primary px-3 py-1 text-label-sm font-label-sm rounded-full tracking-widest">EXECUTIVE</span>
+<span class="bg-tertiary/10 text-tertiary px-3 py-1 text-label-sm font-label-sm rounded-full tracking-widest">STRATEGY</span>
+</div>
+<h3 class="font-headline-lg text-headline-lg text-on-surface">The Vanguard</h3>
+</div>
+<button class="bg-gradient-to-r from-primary-container to-secondary-container text-on-primary-container px-6 py-3 font-label-md text-label-md rounded-lg shadow-[0_0_15px_rgba(168,85,247,0.3)] hover:shadow-[0_0_25px_rgba(168,85,247,0.5)] transition-all active:scale-95">
+                            Select Template
+                        </button>
+</div>
+</div>
+</div>
+<!-- Side Template: Neural Grid -->
+<div class="md:col-span-4 group glass-card rounded-xl flex flex-col">
+<div class="aspect-square relative overflow-hidden rounded-t-xl">
+<img alt="Template Preview" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="A futuristic resume design titled 'Neural Grid' with a focus on data and technology sectors. The preview shows a complex layout with thin glowing lines connecting various skill nodes. The color scheme is deep navy with vibrant soft cyan and electric blue accents. The visual style is reminiscent of a high-tech heads-up display from a sci-fi cockpit, clean and data-rich." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDdE41NqOsfDNeqTd0wYCZRfdQ0yH8IeHql4ITN5mBzZNxFEOvHbb70aaUnUVsE2j31FMpSoIPrGB0OrOmQg_0BWQx_JeHCSNkclc_t-e2wlRAzw6F4WJqyuIs02FNCzFhXJwla0YEph6d-N1m_LuXIXdTzCIC0LwJGJB6RPBjmxFE_ad3G0IOMKP3fVDByvSuY1L-kv9-T6iQxiTwKpyMLD-h6lHdXu237lkiq0t6jfNv3L6e2nPX3OvCM4HHLtYQXrhfwMBg53t4"/>
+</div>
+<div class="p-6 flex flex-col flex-grow">
+<div class="flex gap-2 mb-stack-sm">
+<span class="bg-secondary/10 text-secondary px-2 py-1 text-label-sm font-label-sm rounded-full tracking-widest">TECHNICAL</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-stack-sm">Neural Grid</h3>
+<p class="text-outline text-label-md mb-stack-md flex-grow">Optimized for high-density information architecture and technical mastery.</p>
+<button class="border border-outline-variant hover:border-primary text-on-surface px-4 py-2 font-label-md text-label-md rounded-lg transition-all hover:bg-white/5">
+                        Select Template
+                    </button>
+</div>
+</div>
+<!-- Third Template: Prism Flux -->
+<div class="md:col-span-4 group glass-card rounded-xl flex flex-col">
+<div class="aspect-[4/3] relative overflow-hidden rounded-t-xl">
+<img alt="Template Preview" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="A creative resume template titled 'Prism Flux' featuring vibrant color gradients and abstract crystalline shapes. The design uses light-refracting elements that create rainbow-like effects on an obsidian black surface. The typography is modern and spaced out, conveying a sense of artistic luxury and high-end fashion design. The overall mood is avant-garde and bold." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDm0I11RZqNlB_OgGP40A3X-DOhzfvRVxadFSTXDMCS4-pikVCDbqB1v30LxYR6gUzisxEwJ5ReExork3CYkpOfgZsGTmJCBePBbU4mSD7sgKPyD93iWndnpBX8_k_1Qukge6O94FmHzuP0b7Eig4plIXJJUWe7vPxBAAWs90O_yhgbb3bmiRs6HO9HSLMRrceLVoHyp-oH3stILuE31pUPK077Ma_blq1v7mryxgugslrY2S86dOocZjnGzuum7MV2wOtTM0AfAZs"/>
+</div>
+<div class="p-6 flex flex-col flex-grow">
+<div class="flex gap-2 mb-stack-sm">
+<span class="bg-tertiary/10 text-tertiary px-2 py-1 text-label-sm font-label-sm rounded-full tracking-widest">CREATIVE</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-stack-sm">Prism Flux</h3>
+<p class="text-outline text-label-md mb-stack-md flex-grow">A high-chroma layout for visionaries and creative disruptors.</p>
+<button class="border border-outline-variant hover:border-primary text-on-surface px-4 py-2 font-label-md text-label-md rounded-lg transition-all hover:bg-white/5">
+                        Select Template
+                    </button>
+</div>
+</div>
+<!-- Fourth Template: Orbit One -->
+<div class="md:col-span-8 group relative overflow-hidden glass-card rounded-xl">
+<div class="aspect-[21/9] relative">
+<img alt="Template Preview" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="A wide-format resume blueprint named 'Orbit One' featuring a minimalist space exploration aesthetic. The layout is clean and spacious, with thin silver lines and small geometric icons. The color palette is monochromatic with occasional pulses of deep violet. The environment feels high-tech and ultra-precise, like a mission control terminal for a global corporation." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCLyPw6sn0rI7N6kgxTNHW3uj8a0z1V1r-sYSfhTadl1JnnJWn2Y-Qbapg6QII7xlgSeUa4kplznB_wfZgi3BtSK7OCfGASwVKUXTXLWi_YYzirl1mibFM0G-guHED1bORUkNntvlybKQCKPa2iLyLTAEXfvLzc87u873WU2wepyco8HTkqT2G6hZ6dhqKA5JYSuK1EUnzXRom7cSy5ot0KLxC_b3rAgM4rF_0vZlIn5vx13IXnr1Z7UiImuKh_TXtfCVp7rEZSLF0"/>
+<div class="absolute inset-0 bg-gradient-to-l from-surface-dim/80 via-transparent to-transparent"></div>
+</div>
+<div class="absolute inset-y-0 right-0 w-1/2 flex items-center p-8">
+<div class="text-right w-full">
+<div class="flex gap-2 mb-stack-sm justify-end">
+<span class="bg-primary/10 text-primary px-3 py-1 text-label-sm font-label-sm rounded-full tracking-widest">MINIMALIST</span>
+</div>
+<h3 class="font-headline-lg text-headline-lg text-on-surface mb-stack-sm">Orbit One</h3>
+<p class="text-outline text-body-md mb-stack-md ml-auto max-w-xs">Clean, surgical precision for the minimalist leader who demands focus.</p>
+<button class="bg-surface-container-highest border border-white/10 hover:border-primary text-primary-fixed px-6 py-2 font-label-md text-label-md rounded-lg transition-all active:scale-95">
+                            Select Template
+                        </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Filter & Search Bar Section -->
+<section class="mt-stack-lg p-6 glass-card rounded-xl flex flex-wrap gap-stack-md items-center justify-between border-white/5">
+<div class="flex gap-stack-md">
+<div class="bg-surface-container-low border border-outline-variant rounded-lg px-4 py-2 flex items-center gap-3 w-64">
+<span class="material-symbols-outlined text-outline">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-label-md text-on-surface placeholder:text-outline w-full" placeholder="Search templates..." type="text"/>
+</div>
+<div class="relative group">
+<button class="bg-surface-container-low border border-outline-variant px-4 py-2 rounded-lg text-label-md text-on-surface flex items-center gap-2 hover:bg-white/5 transition-all">
+                        Category: All
+                        <span class="material-symbols-outlined text-outline">expand_more</span>
+</button>
+</div>
+</div>
+<div class="flex items-center gap-stack-sm">
+<span class="text-label-sm text-outline uppercase tracking-widest">Sort by:</span>
+<select class="bg-transparent border-none text-label-md text-primary font-medium focus:ring-0 cursor-pointer">
+<option>Most Popular</option>
+<option>Recently Added</option>
+<option>Trending</option>
+</select>
+</div>
+</section>
+<!-- Feature Spotlight: AI Enhancer -->
+<section class="mt-stack-lg grid grid-cols-1 md:grid-cols-2 gap-gutter">
+<div class="p-stack-lg glass-card rounded-xl border-l-4 border-l-primary flex gap-gutter">
+<div class="flex-shrink-0 w-12 h-12 rounded-lg bg-primary/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+</div>
+<div>
+<h4 class="font-headline-md text-headline-md text-on-surface mb-stack-sm">AI Content Forge</h4>
+<p class="text-body-md text-outline">Every template comes with built-in AI writing assistance. Select a blueprint and our neural engine will generate contextual bullet points tailored to your industry.</p>
+</div>
+</div>
+<div class="p-stack-lg glass-card rounded-xl border-l-4 border-l-tertiary flex gap-gutter">
+<div class="flex-shrink-0 w-12 h-12 rounded-lg bg-tertiary/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-tertiary" style="font-variation-settings: 'FILL' 1;">analytics</span>
+</div>
+<div>
+<h4 class="font-headline-md text-headline-md text-on-surface mb-stack-sm">ATS Precision Check</h4>
+<p class="text-body-md text-outline">Validate your resume against 500+ global Applicant Tracking Systems. High-visibility blueprints ensure your data is parsed with 99.9% accuracy.</p>
+</div>
+</div>
+</section>
+</main>
+<!-- SideNavBar (Editor Mode Overlay) -->
+<aside class="fixed right-0 top-16 bottom-0 w-64 bg-slate-950/40 backdrop-blur-md border-l border-white/10 flex flex-col pt-6 z-40 shadow-[-5px_0_15px_rgba(0,0,0,0.5)]">
+<div class="px-6 mb-8">
+<div class="flex items-center gap-3 mb-1">
+<div class="w-2 h-2 rounded-full bg-tertiary animate-pulse"></div>
+<span class="text-tertiary font-label-sm text-label-sm uppercase tracking-widest">Editor Mode</span>
+</div>
+<h2 class="text-lg font-semibold text-purple-200">CareerForge Pro v2.0</h2>
+</div>
+<nav class="flex flex-col flex-grow">
+<div class="px-3 mb-stack-md">
+<p class="px-3 py-2 text-[10px] text-outline font-bold uppercase tracking-widest">Builder Steps</p>
+<div class="text-slate-400 p-3 flex items-center gap-3 hover:bg-white/5 hover:translate-x-1 transition-all cursor-pointer">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-md text-label-md uppercase tracking-widest">Personal Info</span>
+</div>
+<div class="text-slate-400 p-3 flex items-center gap-3 hover:bg-white/5 hover:translate-x-1 transition-all cursor-pointer">
+<span class="material-symbols-outlined">work</span>
+<span class="font-label-md text-label-md uppercase tracking-widest">Experience</span>
+</div>
+<div class="text-slate-400 p-3 flex items-center gap-3 hover:bg-white/5 hover:translate-x-1 transition-all cursor-pointer">
+<span class="material-symbols-outlined">school</span>
+<span class="font-label-md text-label-md uppercase tracking-widest">Education</span>
+</div>
+</div>
+<div class="mt-auto p-6 border-t border-white/5">
+<button class="w-full bg-white/5 hover:bg-white/10 text-on-surface border border-white/10 py-3 rounded-lg font-label-md text-label-md transition-all active:scale-95 mb-4 shadow-[0_0_10px_rgba(168,85,247,0.3)]">
+                    Export PDF
+                </button>
+<div class="flex flex-col gap-2">
+<div class="text-slate-400 py-2 flex items-center gap-3 hover:text-white cursor-pointer transition-colors">
+<span class="material-symbols-outlined text-sm">help</span>
+<span class="font-label-sm text-label-sm uppercase tracking-widest">Support</span>
+</div>
+<div class="text-slate-400 py-2 flex items-center gap-3 hover:text-white cursor-pointer transition-colors">
+<span class="material-symbols-outlined text-sm">manage_accounts</span>
+<span class="font-label-sm text-label-sm uppercase tracking-widest">Account</span>
+</div>
+</div>
+</div>
+</nav>
+</aside>
+<!-- Background Decoration -->
+<div class="fixed inset-0 -z-10 pointer-events-none">
+<div class="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] rounded-full bg-primary/10 blur-[120px]"></div>
+<div class="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] rounded-full bg-tertiary/10 blur-[120px]"></div>
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full opacity-[0.03]" style="background-image: radial-gradient(#fff 1px, transparent 1px); background-size: 40px 40px;"></div>
+</div>
+</body></html>

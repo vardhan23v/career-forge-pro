@@ -1,0 +1,52 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-background text-slate-800 transition-colors duration-300;
+  }
+}
+
+@layer components {
+  .glass-panel {
+    @apply bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300;
+  }
+  
+  .luminous-border {
+    @apply border border-slate-200 dark:border-slate-800;
+  }
+  
+  .neon-glow {
+    box-shadow: 0 4px 20px rgba(14, 165, 233, 0.15);
+  }
+  
+  .paper-shadow {
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+  }
+  
+  .input-field {
+    @apply w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 focus:border-primary dark:focus:border-primary focus:ring-2 focus:ring-primary/20 dark:focus:ring-primary/20 rounded-lg px-4 py-3 text-slate-900 dark:text-slate-100 outline-none transition-all placeholder:text-slate-400 dark:placeholder:text-slate-500;
+  }
+  
+  .btn-primary {
+    @apply px-4 py-2 bg-primary hover:bg-sky-600 rounded-lg text-white font-semibold active:scale-95 transition-all shadow-sm shadow-primary/30;
+  }
+  
+  .btn-secondary {
+    @apply flex items-center gap-2 px-3 py-1.5 bg-sky-50 dark:bg-sky-500/10 border border-primary/20 dark:border-primary/30 rounded-full text-xs font-semibold text-primary dark:text-sky-400 hover:bg-sky-100 dark:hover:bg-sky-500/20 transition-all;
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-slate-200 rounded-full hover:bg-slate-300 transition-colors;
+}
