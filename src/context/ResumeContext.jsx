@@ -225,7 +225,7 @@ export const ResumeProvider = ({ children }) => {
       setJobMatches(parsedJobs);
     } catch (error) {
       console.error("Failed to fetch jobs:", error);
-      alert("Failed to find job matches. Please check your API key in the .env file or try again.");
+      alert("Error: " + (error.message || "Failed to find job matches. Please check your API keys in Settings."));
     } finally {
       setIsFetchingJobs(false);
     }
@@ -312,7 +312,7 @@ export const ResumeProvider = ({ children }) => {
       }));
     } catch (error) {
       console.error("Failed to generate resume:", error);
-      alert("Failed to generate resume. Please check your API key in the .env file or try again.");
+      alert("Error: " + (error.message || "Failed to generate resume. Please check your API keys in Settings."));
     } finally {
       setIsGenerating(false);
     }
