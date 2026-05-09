@@ -1,5 +1,4 @@
 import React, { createContext, useState, useContext, useEffect } from 'react';
-import { GoogleGenerativeAI } from '@google/generative-ai';
 
 const ResumeContext = createContext();
 

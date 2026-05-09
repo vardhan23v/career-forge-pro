@@ -1,5 +1,7 @@
 import React from 'react';
 
+const BASE = import.meta.env.BASE_URL;
+
 const Templates = () => {
   return (
     <main className="pt-24 pb-16 px-8 md:px-12 max-w-[1440px] mx-auto">
@@ -24,7 +26,7 @@ const Templates = () => {
         {/* Featured Template: The Vanguard */}
         <div className="md:col-span-8 group relative overflow-hidden glass-panel rounded-xl">
           <div className="aspect-[16/9] relative bg-slate-100 dark:bg-slate-800">
-            <img alt="Template Preview" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-90" src="/images/template_vanguard_1778175172670.png"/>
+            <img alt="Template Preview" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-90" src={`${BASE}images/template_vanguard_1778175172670.png`}/>
             <div className="absolute inset-0 bg-gradient-to-t from-white dark:from-slate-900 via-transparent to-transparent"></div>
           </div>
           <div className="p-8 relative -mt-20 z-10">
@@ -46,7 +48,7 @@ const Templates = () => {
         {/* Side Template: Neural Grid */}
         <div className="md:col-span-4 group glass-panel rounded-xl flex flex-col hover:border-primary/50 transition-colors">
           <div className="aspect-square relative overflow-hidden rounded-t-xl border-b border-slate-100 dark:border-slate-800 bg-slate-50 dark:bg-slate-800">
-            <img alt="Template Preview" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 opacity-90 mix-blend-multiply dark:mix-blend-normal" src="/images/template_neural_grid_1778175189698.png"/>
+            <img alt="Template Preview" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 opacity-90 mix-blend-multiply dark:mix-blend-normal" src={`${BASE}images/template_neural_grid_1778175189698.png`}/>
           </div>
           <div className="p-6 flex flex-col flex-grow">
             <div className="flex gap-2 mb-stack-sm">
@@ -63,7 +65,7 @@ const Templates = () => {
         {/* Third Template: Prism Flux */}
         <div className="md:col-span-4 group glass-panel rounded-xl flex flex-col hover:border-primary/50 transition-colors">
           <div className="aspect-[4/3] relative overflow-hidden rounded-t-xl border-b border-slate-100 dark:border-slate-800 bg-slate-50 dark:bg-slate-800">
-            <img alt="Template Preview" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 opacity-90 mix-blend-multiply dark:mix-blend-normal" src="/images/template_prism_flux_1778175207371.png"/>
+            <img alt="Template Preview" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 opacity-90 mix-blend-multiply dark:mix-blend-normal" src={`${BASE}images/template_prism_flux_1778175207371.png`}/>
           </div>
           <div className="p-6 flex flex-col flex-grow">
             <div className="flex gap-2 mb-stack-sm">
@@ -80,7 +82,7 @@ const Templates = () => {
         {/* Fourth Template: Orbit One */}
         <div className="md:col-span-8 group relative overflow-hidden glass-panel rounded-xl">
           <div className="aspect-[21/9] relative bg-slate-100 dark:bg-slate-800">
-            <img alt="Template Preview" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-90 mix-blend-multiply dark:mix-blend-normal" src="/images/template_orbit_one_1778175223427.png"/>
+            <img alt="Template Preview" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-90 mix-blend-multiply dark:mix-blend-normal" src={`${BASE}images/template_orbit_one_1778175223427.png`}/>
             <div className="absolute inset-0 bg-gradient-to-l from-white/90 dark:from-slate-900/90 via-transparent to-transparent"></div>
           </div>
           <div className="absolute inset-y-0 right-0 w-1/2 flex items-center p-8 z-10">
