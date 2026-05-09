@@ -3,7 +3,7 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import path from 'path';
 import { fileURLToPath } from 'url';
-
+import { GoogleGenerativeAI } from '@google/generative-ai';
 
 // Initialize environment variables
 dotenv.config();
@@ -20,20 +20,11 @@ app.use(express.json());
 
 // --- API Provider Helpers ---
 const callGemini = async (prompt, apiKey) => {
-  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro:generateContent?key=${apiKey}`;
-  const response = await fetch(url, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      contents: [{ parts: [{ text: prompt }] }]
-    })
-  });
-  if (!response.ok) {
-    const err = await response.json();
-    throw new Error(`Gemini API error: ${response.status} - ${err?.error?.message}`);
-  }
-  const data = await response.json();
-  return data.candidates[0].content.parts[0].text;
+  const genAI = new GoogleGenerativeAI(apiKey);
+  const model = genAI.getGenerativeModel({ model: "gemini-1.5-pro" });
+  const result = await model.generateContent(prompt);
+  const response = await result.response;
+  return response.text();
 };
 
 const callOpenAI = async (prompt, apiKey) => {
@@ -109,7 +100,7 @@ const generateWithFallback = async (prompt) => {
   if (configured.length === 0) {
     throw new Error('No API keys configured. Add VITE_GEMINI_API_KEY, VITE_OPENAI_API_KEY, or VITE_GROQ_API_KEY to your .env file.');
   }
-  throw new Error(`All AI providers failed (${configured.join(', ')}). Please try again later.`);
+  throw new Error(`All AI providers failed (${configured.join(', ')}). Details: ${errors.join(' | ')}`);
 };
 
 // API Endpoints
