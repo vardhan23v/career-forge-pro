@@ -174,7 +174,7 @@ export const ResumeProvider = ({ children }) => {
       Skills: ${resumeData.skills.join(', ')}
       Summary: ${resumeData.summary}`;
 
-      const response = await fetch('https://career-forge-pro.onrender.com/api/find-jobs', {
+      const response = await fetch('/api/find-jobs', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ prompt })
@@ -214,7 +214,7 @@ export const ResumeProvider = ({ children }) => {
       Raw Text:
       ${rawText}`;
 
-      const response = await fetch('https://career-forge-pro.onrender.com/api/generate-resume', {
+      const response = await fetch('/api/generate-resume', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ prompt })

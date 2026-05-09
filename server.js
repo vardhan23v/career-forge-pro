@@ -3,7 +3,7 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { GoogleGenerativeAI } from '@google/generative-ai';
+
 
 // Initialize environment variables
 dotenv.config();
@@ -12,64 +12,115 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5001;
 
 // Middleware
 app.use(cors());
 app.use(express.json());
 
+// --- API Provider Helpers ---
+const callGemini = async (prompt, apiKey) => {
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+  const response = await fetch(url, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      contents: [{ parts: [{ text: prompt }] }]
+    })
+  });
+  if (!response.ok) {
+    const err = await response.json();
+    throw new Error(`Gemini API error: ${response.status} - ${err?.error?.message}`);
+  }
+  const data = await response.json();
+  return data.candidates[0].content.parts[0].text;
+};
+
+const callOpenAI = async (prompt, apiKey) => {
+  const response = await fetch('https://api.openai.com/v1/chat/completions', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${apiKey}`
+    },
+    body: JSON.stringify({
+      model: 'gpt-4o-mini',
+      messages: [{ role: 'user', content: prompt }],
+      temperature: 0.3
+    })
+  });
+  if (!response.ok) {
+    const err = await response.json();
+    throw new Error(`OpenAI API error: ${response.status} - ${err?.error?.message}`);
+  }
+  const data = await response.json();
+  return data.choices[0].message.content;
+};
+
+const callGroq = async (prompt, apiKey) => {
+  const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${apiKey}`
+    },
+    body: JSON.stringify({
+      model: 'llama-3.3-70b-versatile',
+      messages: [{ role: 'user', content: prompt }],
+      temperature: 0.3
+    })
+  });
+  if (!response.ok) {
+    const err = await response.json();
+    throw new Error(`Groq API error: ${response.status} - ${err?.error?.message}`);
+  }
+  const data = await response.json();
+  return data.choices[0].message.content;
+};
+
+const generateWithFallback = async (prompt) => {
+  const geminiApiKey = process.env.VITE_GEMINI_API_KEY?.trim() || process.env.GEMINI_API_KEY?.trim();
+  const openAiApiKey = process.env.VITE_OPENAI_API_KEY?.trim() || process.env.OPENAI_API_KEY?.trim();
+  const groqApiKey = process.env.VITE_GROQ_API_KEY?.trim() || process.env.GROQ_API_KEY?.trim();
+
+  // Provider chain: Gemini -> OpenAI -> Groq
+  const providers = [
+    { name: 'Gemini', key: geminiApiKey, call: callGemini },
+    { name: 'ChatGPT', key: openAiApiKey, call: callOpenAI },
+    { name: 'Groq', key: groqApiKey, call: callGroq },
+  ];
+
+  let text;
+  let errors = [];
+
+  for (const provider of providers) {
+    if (!provider.key) continue;
+    try {
+      text = await provider.call(prompt, provider.key);
+      console.log(`✅ Generation completed using ${provider.name}`);
+      return text;
+    } catch (err) {
+      console.warn(`⚠️ ${provider.name} failed: ${err.message}`);
+      errors.push(`${provider.name}: ${err.message}`);
+    }
+  }
+
+  const configured = providers.filter(p => p.key).map(p => p.name);
+  if (configured.length === 0) {
+    throw new Error('No API keys configured. Add VITE_GEMINI_API_KEY, VITE_OPENAI_API_KEY, or VITE_GROQ_API_KEY to your .env file.');
+  }
+  throw new Error(`All AI providers failed (${configured.join(', ')}). Please try again later.`);
+};
+
 // API Endpoints
 app.post('/api/generate-resume', async (req, res) => {
   try {
     const { prompt } = req.body;
-    const groqApiKey = process.env.VITE_GROQ_API_KEY?.trim();
-    const geminiApiKey = process.env.VITE_GEMINI_API_KEY?.trim();
-
     if (!prompt) {
       return res.status(400).json({ error: "Prompt is required" });
     }
 
-    let text = "";
-    let groqSuccess = false;
-
-    if (groqApiKey) {
-      try {
-        const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
-          method: "POST",
-          headers: {
-            "Authorization": `Bearer ${groqApiKey}`,
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify({
-            model: "llama-3.3-70b-versatile",
-            messages: [{ role: "user", content: prompt }],
-            temperature: 0.3
-          })
-        });
-
-        if (response.ok) {
-          const data = await response.json();
-          text = data.choices[0].message.content;
-          groqSuccess = true;
-        } else {
-          console.warn("Groq API failed, falling back to Gemini...");
-        }
-      } catch (e) {
-        console.warn("Groq API error, falling back to Gemini...", e);
-      }
-    }
-
-    if (!groqSuccess) {
-      if (!geminiApiKey) {
-        return res.status(500).json({ error: "No valid API keys found on the server. Please check your .env file." });
-      }
-      const genAI = new GoogleGenerativeAI(geminiApiKey);
-      const model = genAI.getGenerativeModel({ model: "gemini-1.5-pro" });
-      const result = await model.generateContent(prompt);
-      const response = await result.response;
-      text = response.text();
-    }
-
+    const text = await generateWithFallback(prompt);
     res.json({ text });
   } catch (error) {
     console.error("Generate Resume Error:", error);
@@ -80,56 +131,15 @@ app.post('/api/generate-resume', async (req, res) => {
 app.post('/api/find-jobs', async (req, res) => {
   try {
     const { prompt } = req.body;
-    const groqApiKey = process.env.VITE_GROQ_API_KEY?.trim();
-    const geminiApiKey = process.env.VITE_GEMINI_API_KEY?.trim();
-
     if (!prompt) {
       return res.status(400).json({ error: "Prompt is required" });
     }
 
-    let text = "";
-    let groqSuccess = false;
-
-    if (groqApiKey) {
-      try {
-        const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
-          method: "POST",
-          headers: {
-            "Authorization": `Bearer ${groqApiKey}`,
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify({
-            model: "llama-3.3-70b-versatile",
-            messages: [{ role: "user", content: prompt }],
-            temperature: 0.3
-          })
-        });
-
-        if (response.ok) {
-          const data = await response.json();
-          text = data.choices[0].message.content;
-          groqSuccess = true;
-        } else {
-          console.warn("Groq API failed, falling back to Gemini...");
-        }
-      } catch (e) {
-        console.warn("Groq API error, falling back to Gemini...", e);
-      }
-    }
-
-    if (!groqSuccess) {
-      if (!geminiApiKey) {
-        return res.status(500).json({ error: "No valid API keys found on the server. Please check your .env file." });
-      }
-      const genAI = new GoogleGenerativeAI(geminiApiKey);
-      const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
-      const result = await model.generateContent(prompt);
-      const response = await result.response;
-      text = response.text();
-    }
-
-    text = text.replace(/```json/gi, '').replace(/```/g, '').trim();
-    const parsedJobs = JSON.parse(text);
+    const text = await generateWithFallback(prompt);
+    
+    // Clean and parse JSON
+    const cleanedText = text.replace(/```json/gi, '').replace(/```/g, '').trim();
+    const parsedJobs = JSON.parse(cleanedText);
     
     res.json({ jobs: parsedJobs });
   } catch (error) {
