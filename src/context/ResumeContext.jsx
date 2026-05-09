@@ -5,6 +5,11 @@ const ResumeContext = createContext();
 
 export const useResume = () => useContext(ResumeContext);
 
+// Dynamic API URL for both local dev and GitHub Pages production
+const API_BASE_URL = import.meta.env.MODE === 'development' 
+  ? '/api' 
+  : 'https://career-forge-pro.onrender.com/api';
+
 export const ResumeProvider = ({ children }) => {
   // Theme state
   const [theme, setTheme] = useState('dark');
@@ -174,7 +179,7 @@ export const ResumeProvider = ({ children }) => {
       Skills: ${resumeData.skills.join(', ')}
       Summary: ${resumeData.summary}`;
 
-      const response = await fetch('/api/find-jobs', {
+      const response = await fetch(`${API_BASE_URL}/find-jobs`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ prompt })
@@ -214,7 +219,7 @@ export const ResumeProvider = ({ children }) => {
       Raw Text:
       ${rawText}`;
 
-      const response = await fetch('/api/generate-resume', {
+      const response = await fetch(`${API_BASE_URL}/generate-resume`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ prompt })
